@@ -1,0 +1,1 @@
+console.error("Error: Cannot find module '/Users/michaelspraggins/Projects/firstQuarterProject/scripts/main.js' from '/Users/michaelspraggins/Projects/firstQuarterProject'");

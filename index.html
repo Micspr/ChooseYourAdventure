@@ -3,12 +3,26 @@
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Page Title</title>
+    <title>Choose Your Adventure!</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
-    <script src="main.js"></script>
+    <script defer src="bundle.js"></script>
 </head>
+<header>
+    <div>
+        <p>Choose Your Adventure!</p>
+    </div>
+</header>
 <body>
-    
+    <div id='mainContainer'>
+        <p>Enter your name, Champion:</p><br>
+        <input type="text" id="championName" pattern="[a-zA-Z]+" required><br>
+        <p>What is your title?</p>
+        <input type="text" id='championTitle' pattern='[a-zA-Z0-9]+' required>
+        <p>Where are you from?</p><br>
+        <input type='text' id='ChampionHeritage' pattern="[a-zA-Z]+" required><br>
+        <p>What... is the air-speed velocity of an unladen swallow?</p><br>
+        <input type="text" id='godMode'>
+    </div>
 </body>
 </html>
