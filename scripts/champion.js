@@ -4,17 +4,15 @@ const rollDice = require('./rollDice.js')
 
 const championValues = {}
 
-let creatureInput = monster.monsters[rollDice(3)]
+let creatureInput = monster.monsters[rollDice(3)].name
 
 const championSet = () => {
-    championValues = {
-        'name' : localStorage.getItem('name') || "", 
-        'title' : localStorage.getItem('title') || "", 
-        'heritage' : localStorage.getItem('heritage') || "", 
-        'mode' : localStorage.getItem('mode') || "",
-        'monster' : creatureInput,
-        'storyPoint': 0
-    }
+    championValues.name = localStorage.getItem('name')
+    championValues.title = localStorage.getItem('title')
+    championValues.heritage = localStorage.getItem('heritage')
+    championValues.mode = localStorage.getItem('mode')
+    championValues.monsterTrack = creatureInput
+    championValues.storyPoint = 0
 }
 
 module.exports = {championValues, championSet}

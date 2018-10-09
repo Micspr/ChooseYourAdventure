@@ -1,4 +1,4 @@
-const storyScript = require('./story.js')
+const story = require('./story.js')
 const storyButtons = require('./buttons.js')
 const champion = require('./champion.js')
 
@@ -6,7 +6,7 @@ const champion = require('./champion.js')
 let storySoFar = ""
 const insertStory = (text) => `<div class='storyText'>${text}</div>`
 
-const insertButtons = (btN) => `<div class='storyDiv'>${btN}/div>`
+const insertButtons = (btN) => `<div class='storyDiv'>${btN}</div>`
 
 let form = document.querySelector('#userInput')
 form.addEventListener('submit', (e) => {
@@ -19,11 +19,11 @@ form.addEventListener('submit', (e) => {
         localStorage.mode = true;
     }
     champion.championSet()
+    story.buildScript(champion.championValues)
     champion.championValues.storyPoint = 1;
     document.querySelector('#adventureTitle').textContent = `Welcome to ${champion.championValues.name}'s Adventure!`
-    storySoFar += storyScript[champion.championValues.storyPoint]
+    storySoFar += story.script[champion.storyPoint]
     localStorage.story = storySoFar
     form.remove();
-    console.log(champion.championValues)
-    document.querySelector('.mainContainer').innerHTML = `${insertStory(storyScript[champion.championValues.storyPoint])} ${insertButtons(storyButtons[champion.championValues.storyPoint])}`
+    document.querySelector('.mainContainer').innerHTML = `${insertStory(story.script[champion.championValues.storyPoint])} ${insertButtons(storyButtons[champion.championValues.storyPoint])}`
 })
