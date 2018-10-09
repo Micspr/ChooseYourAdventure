@@ -1,8 +1,9 @@
-#mainContainer {
+.mainContainer {
     display: flex;
     justify-content: space-around;
     font-size: 25px;
-    margin: 0;
+    margin: 1em;
+    flex-direction: column;
 }
 
 #footer {
@@ -37,8 +38,41 @@
     cursor: pointer;
     text-align: center;
     border-radius: 15px;
+    max-width: 50%;
 }
 
-.button:active {
+.button:active, .storyButton1:active, .storyButton2:active{
     transform: translateY(4px)
+}
+
+.storyButton1 {
+    font-size: 30px;
+    color:black;
+    background-color: blue;
+    border: 2px solid black;
+    box-shadow: 0 3px black;
+    cursor: pointer;
+    text-align: center;
+    border-radius: 15px;
+}
+
+.storyButton2 {
+    font-size: 30px;
+    color:black;
+    background-color: red;
+    border: 2px solid black;
+    box-shadow: 0 3px black;
+    cursor: pointer;
+    text-align: center;
+    border-radius: 15px;
+}
+.storyDiv {
+    display: flex;
+    justify-content: space-between;
+}
+
+.storyText {
+    display: flex;
+    justify-content: center;
+    margin: 2em;
 }
