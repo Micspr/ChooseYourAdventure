@@ -1,0 +1,44 @@
+#mainContainer {
+    display: flex;
+    justify-content: space-around;
+    font-size: 25px;
+    margin: 0;
+}
+
+#footer {
+    display: flex;
+    justify-content: center;
+}
+
+#header {
+    font-size: 30px;
+}
+
+#adventureTitle {
+    display: flex;
+    justify-content: center;
+}
+
+#userInput {
+    margin: 125px;
+}
+
+#background {
+    background-image: url('https://images.pexels.com/photos/235985/pexels-photo-235985.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260');
+    color: white;
+}
+
+.button {
+    font-size: 30px;
+    color:black;
+    background-color: goldenrod;
+    border: 2px solid black;
+    box-shadow: 0 3px black;
+    cursor: pointer;
+    text-align: center;
+    border-radius: 15px;
+}
+
+.button:active {
+    transform: translateY(4px)
+}

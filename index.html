@@ -1,34 +1,37 @@
 <!DOCTYPE html>
-<html>
+<html id='background'>
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Choose Your Adventure!</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
-    <script defer src="bundle.js"></script>
+    <link rel="stylesheet" type="text/css" media="screen" href="style.css" />
+    <script defer src="main.js"></script>
 </head>
-<header>
+<header id='header'>
     <div>
-        <p>Choose Your Adventure!</p>
-        <button type="button" id='chronoLog'>Your story so far...</button>
+        <p id='adventureTitle'>Choose Your Adventure!</p>
     </div>
 </header>
 <body>
     <div id='mainContainer'>
-        <p>Enter your name, Champion:</p><br>
-        <input type="text" id="championName" pattern="[a-zA-Z]+" required><br>
-        <p>What is your title?</p>
-        <input type="text" id='championTitle' pattern='[a-zA-Z0-9]+' required>
-        <p>Where are you from?</p><br>
-        <input type='text' id='ChampionHeritage' pattern="[a-zA-Z]+" required><br>
-        <p>What... is the air-speed velocity of an unladen swallow?</p><br>
-        <input type="text" id='godMode'>
+        <form id='userInput'>
+            <label for='championName'>Enter your name, Champion:</label>
+            <input type="text" id="championName" pattern="[a-zA-Z]+" required><br>
+            <label for='championTitle'>What is your title?</label>
+            <input type="text" id='championTitle' pattern='[a-zA-Z0-9]+' required><br>
+            <label for='ChampionHeritage'>Where are you from?</label>
+            <input type='text' id='championHeritage' pattern="[a-zA-Z]+" required><br>
+            <label for='godMode'>What... is the air-speed velocity of an unladen swallow?</label>
+            <input type="text" id='godMode'><br><br>
+            <input type="submit" class='button'>
+        </form>
     </div>
 </body>
-<footer>
+<footer id='footer'>
     <div>
-        <button type='button' id='restart'>Reset</button>
+        <button type='button' id='restart' class='button'>Reset</button>
+        <button type="button" id='chronoLog' class='button'>Your story so far...</button>
     </div>
 </footer>
 </html>
