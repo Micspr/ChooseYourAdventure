@@ -47,7 +47,7 @@ const buildScript = (champObj) => {
         `<p>${champObj.name} went home rather than hunt Proximo.<br>
             Proximo took the opportunity to eat every living creature in ${champObj.heritage} and razed it to the ground.<br>
             Lament your choices in the belly of the Devourer.</p>`, //2
-        `<p>You begins your journey on a long winding path on the edge of the great ${champObj.heritage} Valley.<br>
+        `<p>You begin your journey on a long winding path on the edge of the great ${champObj.heritage} Valley.<br>
             While following the path along a set of cliffs, you encounter a hideous Kobold bearing the three-clawed mark of Proximo dragging a sack across the path.<br>
             "Clearly to complete this quest, I must be able to slaughter one of Proximo's weakest of minions!",<br>
             ${champObj.name} thought as they dove into the poor creature.</p>`, //3

@@ -23,4 +23,23 @@ const insertButtons = (btN) => `<div class='storyDiv'>${btN}</div>`
 //     <button type='button' id='12' class='storyButton2'>No</button>` //7
 // ]
 
+const storyButtonInputs = [
+    '', //0
+    `<button type='button' id='3' class='storyButton1'>Accept Quest</button>
+    <button type='button' id='2' class='storyButton2'>Decline Quest</button>`, //1
+    '', //2
+    `<button type='button' id='fight.0' class='button'>Continue</button>`, //3
+    `<button type='button' id='5' class='storyButton1'>Choose the Sword</button>
+    <button type='button' id='6' class='storyButton2'>Choose the Shield</button>`, //4
+    `<button type='button' id='7' class='button'>Continue</button>`, //5
+    `<button type='button' id='7' class='button'>Continue</button>`, //6
+    `<button type='button' id='8' class='storyButton1'>Follow the Path</button>
+    <button type='button' id='10' class='storyButton2'>Sneak in the Brush</button>`, //7
+    `<button type='button' id='9' class='storyButton1'>Yes</button>
+    <button type='button' id='10' class='storyButton2'>No</button>`, // 8
+    '', //9
+    `<button type='button id='fight.1' class='button'>Continue</button>`, //10
+    '', //11
+    '' //12
+]
 module.exports = {storyButtonInputs, insertButtons};
