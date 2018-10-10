@@ -1,11 +1,13 @@
 (function(){function r(e,n,t){function o(i,f){if(!n[i]){if(!e[i]){var c="function"==typeof require&&require;if(!f&&c)return c(i,!0);if(u)return u(i,!0);var a=new Error("Cannot find module '"+i+"'");throw a.code="MODULE_NOT_FOUND",a}var p=n[i]={exports:{}};e[i][0].call(p.exports,function(r){var n=e[i][1][r];return o(n||r)},p,p.exports,r,e,n,t)}return n[i].exports}for(var u="function"==typeof require&&require,i=0;i<t.length;i++)o(t[i]);return o}return r})()({1:[function(require,module,exports){
+const insertButtons = (btN) => `<div class='storyDiv'>${btN}</div>`
+
 const storyButtonInputs = [
     '', 
     `<button type='button' id='accept' class='storyButton1'>Accept Quest</button>
     <button type='button' id='decline' class='storyButton2'>Decline Quest</button>`
 ]
 
-module.exports = storyButtonInputs;
+module.exports = {storyButtonInputs, insertButtons};
 },{}],2:[function(require,module,exports){
 const monster = require('./monster.js')
 const rollDice = require('./rollDice.js')
@@ -32,9 +34,6 @@ const champion = require('./champion.js')
 
 
 let storySoFar = ""
-const insertStory = (text) => `<div class='storyText'>${text}</div>`
-
-const insertButtons = (btN) => `<div class='storyDiv'>${btN}</div>`
 
 let form = document.querySelector('#userInput')
 form.addEventListener('submit', (e) => {
@@ -53,7 +52,10 @@ form.addEventListener('submit', (e) => {
     storySoFar += story.script[champion.storyPoint]
     localStorage.story = storySoFar
     form.remove();
-    document.querySelector('.mainContainer').innerHTML = `${insertStory(story.script[champion.championValues.storyPoint])} ${insertButtons(storyButtons[champion.championValues.storyPoint])}`
+    document.querySelector('.mainContainer').innerHTML = (
+        `${story.insertStory(story.script[champion.championValues.storyPoint])} 
+        ${storyButtons.insertButtons(storyButtons.storyButtonInputs[champion.championValues.storyPoint])}`)
+    updateButtons(champion.championValues.storyPoint)
 })
 },{"./buttons.js":1,"./champion.js":2,"./story.js":6}],4:[function(require,module,exports){
 const rollDice = require('./rollDice.js')
@@ -74,11 +76,11 @@ const subMonsters = [{name: 'Slime', hp: 3, strength: rollDice(2)+1},
 
 module.exports = {monsters, theWhiteRaven, subMonsters}
 },{"./rollDice.js":5}],5:[function(require,module,exports){
-const rollDice = (diceNum) => Math.floor(Math.random() * diceNum)
-
-module.exports = rollDice;
+module.exports = rollDice = (diceNum) => Math.floor(Math.random() * diceNum);
 },{}],6:[function(require,module,exports){
 const script = []
+
+const insertStory = (text) => `<div class='storyText'>${text}</div>`
 
 const buildScript = (obj) => {
     const preFabScriptArr = ['',`<p>Gather and behold! The story of ${obj.name}, the ${obj.title} of ${obj.heritage}!<br>
@@ -90,5 +92,5 @@ const buildScript = (obj) => {
     }
 }
 
-module.exports = {buildScript, script};
+module.exports = {buildScript, script, insertStory};
 },{}]},{},[3]);

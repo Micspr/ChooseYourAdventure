@@ -1,3 +1,1 @@
-const rollDice = (diceNum) => Math.floor(Math.random() * diceNum)
-
-module.exports = rollDice;
+module.exports = rollDice = (diceNum) => Math.floor(Math.random() * diceNum);

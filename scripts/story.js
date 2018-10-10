@@ -1,5 +1,7 @@
 const script = []
 
+const insertStory = (text) => `<div class='storyText'>${text}</div>`
+
 const buildScript = (obj) => {
     const preFabScriptArr = ['',`<p>Gather and behold! The story of ${obj.name}, the ${obj.title} of ${obj.heritage}!<br>
     Will they succeed upon their quest and conquer the mighty ${obj.monsterTrack}?<br>
@@ -10,4 +12,4 @@ const buildScript = (obj) => {
     }
 }
 
-module.exports = {buildScript, script};
+module.exports = {buildScript, script, insertStory};

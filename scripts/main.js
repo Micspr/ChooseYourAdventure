@@ -4,9 +4,6 @@ const champion = require('./champion.js')
 
 
 let storySoFar = ""
-const insertStory = (text) => `<div class='storyText'>${text}</div>`
-
-const insertButtons = (btN) => `<div class='storyDiv'>${btN}</div>`
 
 let form = document.querySelector('#userInput')
 form.addEventListener('submit', (e) => {
@@ -25,5 +22,8 @@ form.addEventListener('submit', (e) => {
     storySoFar += story.script[champion.storyPoint]
     localStorage.story = storySoFar
     form.remove();
-    document.querySelector('.mainContainer').innerHTML = `${insertStory(story.script[champion.championValues.storyPoint])} ${insertButtons(storyButtons[champion.championValues.storyPoint])}`
+    document.querySelector('.mainContainer').innerHTML = (
+        `${story.insertStory(story.script[champion.championValues.storyPoint])} 
+        ${storyButtons.insertButtons(storyButtons.storyButtonInputs[champion.championValues.storyPoint])}`)
+    updateButtons(champion.championValues.storyPoint)
 })
