@@ -24,6 +24,25 @@ const insertButtons = (btN) => `<div class='storyDiv'>${btN}</div>`
 //     <button type='button' id='12' class='storyButton2'>No</button>` //7
 // ]
 
+const storyButtonInputs = [
+    '', //0
+    `<button type='button' id='3' class='storyButton1'>Accept Quest</button>
+    <button type='button' id='2' class='storyButton2'>Decline Quest</button>`, //1
+    '', //2
+    `<button type='button' id='fight.0' class='contButton'>Continue</button>`, //3
+    `<button type='button' id='5' class='storyButton1'>Choose the Sword</button>
+    <button type='button' id='6' class='storyButton2'>Choose the Shield</button>`, //4
+    `<button type='button' id='7' class='contButton'>Continue</button>`, //5
+    `<button type='button' id='7' class='contButton'>Continue</button>`, //6
+    `<button type='button' id='8' class='storyButton1'>Follow the Path</button>
+    <button type='button' id='10' class='storyButton2'>Sneak in the Brush</button>`, //7
+    `<button type='button' id='9' class='storyButton1'>Yes</button>
+    <button type='button' id='10' class='storyButton2'>No</button>`, // 8
+    '', //9
+    `<button type='button id='fight.1' class='contButton'>Continue</button>`, //10
+    '', //11
+    '' //12
+]
 module.exports = {storyButtonInputs, insertButtons};
 },{}],2:[function(require,module,exports){
 const rollDice = require('./rollDice.js')
@@ -47,38 +66,55 @@ const championSet = () => {
 }
 
 module.exports = {championValues, championSet}
-},{"./rollDice.js":5,"./weapons.js":7}],3:[function(require,module,exports){
+},{"./rollDice.js":5,"./weapons.js":8}],3:[function(require,module,exports){
 const story = require('./story.js')
 const storyButtons = require('./buttons.js')
 const champion = require('./champion.js')
 const treasure = require('./weapons.js')
+const updateButtons = require('./updateButton.js')
 
 
 let storySoFar = ""
 
 let form = document.querySelector('#userInput')
-form.addEventListener('submit', (e) => {
+const submitForm = () => {
+    form.addEventListener('submit', (e) => {
+        e.preventDefault()
+
+        localStorage.name = document.querySelector('#championName').value
+        localStorage.title = document.querySelector('#championTitle').value
+        localStorage.heritage = document.querySelector('#championHeritage').value
+        if(document.querySelector('#godMode').value === 'What do you mean? An African or European swallow?') {
+            localStorage.mode = true;
+        }
+        champion.championSet()
+        story.buildScript(champion.championValues, treasure.swords, treasure.shields)
+        champion.championValues.storyPoint = 1;
+        document.querySelector('#adventureTitle').textContent = `Welcome to ${champion.championValues.name}'s Adventure!`
+        storySoFar += story.script[champion.storyPoint]
+        localStorage.story = storySoFar
+        form.remove();
+        document.querySelector('.mainContainer').innerHTML = (
+            `${story.insertStory(story.script[champion.championValues.storyPoint])} 
+            ${storyButtons.insertButtons(storyButtons.storyButtonInputs[champion.championValues.storyPoint])}`)
+        updateButtons()
+    })
+}
+
+submitForm()
+
+let reset = document.querySelector('#restart')
+reset.addEventListener('click', (e) => {
     e.preventDefault()
 
-    localStorage.name = document.querySelector('#championName').value
-    localStorage.title = document.querySelector('#championTitle').value
-    localStorage.heritage = document.querySelector('#championHeritage').value
-    if(document.querySelector('#godMode').value === 'What do you mean? An African or European swallow?') {
-        localStorage.mode = true;
-    }
-    champion.championSet()
-    story.buildScript(champion.championValues, treasure.swords, treasure.shields)
-    champion.championValues.storyPoint = 1;
-    document.querySelector('#adventureTitle').textContent = `Welcome to ${champion.championValues.name}'s Adventure!`
-    storySoFar += story.script[champion.storyPoint]
-    localStorage.story = storySoFar
-    form.remove();
+    champion.championValues.storyPoint = 0;
+    document.querySelector('#adventureTitle').textContent = 'Choose Your Adventure!'
     document.querySelector('.mainContainer').innerHTML = (
         `${story.insertStory(story.script[champion.championValues.storyPoint])} 
         ${storyButtons.insertButtons(storyButtons.storyButtonInputs[champion.championValues.storyPoint])}`)
-    updateButtons(champion.championValues.storyPoint)
+    submitForm()
 })
-},{"./buttons.js":1,"./champion.js":2,"./story.js":6,"./weapons.js":7}],4:[function(require,module,exports){
+},{"./buttons.js":1,"./champion.js":2,"./story.js":6,"./updateButton.js":7,"./weapons.js":8}],4:[function(require,module,exports){
 const rollDice = require('./rollDice.js')
 
 
@@ -133,6 +169,8 @@ const insertStory = (text) => `<div class='storyText'>${text}</div>`
 //     }
 // }
 
+const fight = {0: 0, 1: 0}
+
 const buildScript = (champObj) => {
     const preFabScriptArr = [
         `<form id='userInput'>
@@ -153,7 +191,7 @@ const buildScript = (champObj) => {
         `<p>${champObj.name} went home rather than hunt Proximo.<br>
             Proximo took the opportunity to eat every living creature in ${champObj.heritage} and razed it to the ground.<br>
             Lament your choices in the belly of the Devourer.</p>`, //2
-        `<p>You begins your journey on a long winding path on the edge of the great ${champObj.heritage} Valley.<br>
+        `<p>You begin your journey on a long winding path on the edge of the great ${champObj.heritage} Valley.<br>
             While following the path along a set of cliffs, you encounter a hideous Kobold bearing the three-clawed mark of Proximo dragging a sack across the path.<br>
             "Clearly to complete this quest, I must be able to slaughter one of Proximo's weakest of minions!",<br>
             ${champObj.name} thought as they dove into the poor creature.</p>`, //3
@@ -191,6 +229,56 @@ const buildScript = (champObj) => {
 
 module.exports = {buildScript, script, insertStory};
 },{"./monster.js":4}],7:[function(require,module,exports){
+const story = require('./story.js')
+const storyButtons = require('./buttons.js')
+const champion = require('./champion.js')
+
+
+const updateButtons = () => {
+    let buttonOne = document.querySelector('.storyButton1') || ''
+    let buttonTwo = document.querySelector('.storyButton2') || ''
+    let contButton = document.querySelector('.contButton') || ''
+
+    if(buttonOne !== ''){
+        buttonOne.addEventListener('click', (e) => {
+        e.preventDefault()
+
+        champion.championValues.storyPoint = Number.parseInt(buttonOne.id)
+        document.querySelector('.mainContainer').innerHTML = (
+            `${story.insertStory(story.script[champion.championValues.storyPoint])} 
+            ${storyButtons.insertButtons(storyButtons.storyButtonInputs[champion.championValues.storyPoint])}`)
+        updateButtons()
+        })
+    }
+
+    if(buttonTwo !== ''){
+        buttonTwo.addEventListener('click', (e) => {
+        e.preventDefault()
+
+        champion.championValues.storyPoint = Number.parseInt(buttonTwo.id)
+        document.querySelector('.mainContainer').innerHTML = (
+            `${story.insertStory(story.script[champion.championValues.storyPoint])} 
+            ${storyButtons.insertButtons(storyButtons.storyButtonInputs[champion.championValues.storyPoint])}`)
+        updateButtons()
+        })
+    }
+
+    if(contButton !== ''){
+        contButton.addEventListener('click', (e) => {
+        e.preventDefault()
+        
+        champion.championValues.storyPoint = Number.parseInt(contButton.id)
+        document.querySelector('.mainContainer').innerHTML = (
+            `${story.insertStory(story.script[champion.championValues.storyPoint])} 
+            ${storyButtons.insertButtons(storyButtons.storyButtonInputs[champion.championValues.storyPoint])}`)
+        updateButtons()
+        })
+    }
+}
+
+
+module.exports = updateButtons;
+},{"./buttons.js":1,"./champion.js":2,"./story.js":6}],8:[function(require,module,exports){
 const rollDice = require('./rollDice.js')
 
 const swords = [

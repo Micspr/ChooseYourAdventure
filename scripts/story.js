@@ -27,6 +27,8 @@ const insertStory = (text) => `<div class='storyText'>${text}</div>`
 //     }
 // }
 
+const fight = {0: 0, 1: 0}
+
 const buildScript = (champObj) => {
     const preFabScriptArr = [
         `<form id='userInput'>
