@@ -2,7 +2,6 @@ const story = require('./story.js')
 const storyButtons = require('./buttons.js')
 const champion = require('./champion.js')
 const treasure = require('./weapons.js')
-const monsters = require('./monster.js')
 
 
 let storySoFar = ""
@@ -18,7 +17,7 @@ form.addEventListener('submit', (e) => {
         localStorage.mode = true;
     }
     champion.championSet()
-    story.buildScript(champion.championValues, monsters, treasure.swords, treasure.shields)
+    story.buildScript(champion.championValues, treasure.swords, treasure.shields)
     champion.championValues.storyPoint = 1;
     document.querySelector('#adventureTitle').textContent = `Welcome to ${champion.championValues.name}'s Adventure!`
     storySoFar += story.script[champion.storyPoint]
