@@ -128,10 +128,10 @@ const fightTwoText = () => {
             monsters.updateMonsterStrength(1)
         }
         if(champion.championValues.hp <= 0) {
-            won = 11
+            won = 12
         }
         if(monsters.monsters[1].hp <= 0) {
-            won = 12
+            won = 11
         }
     }
         dragonText += `<br>The battle is now over...</p>`
