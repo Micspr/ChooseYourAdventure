@@ -1,4 +1,6 @@
 (function(){function r(e,n,t){function o(i,f){if(!n[i]){if(!e[i]){var c="function"==typeof require&&require;if(!f&&c)return c(i,!0);if(u)return u(i,!0);var a=new Error("Cannot find module '"+i+"'");throw a.code="MODULE_NOT_FOUND",a}var p=n[i]={exports:{}};e[i][0].call(p.exports,function(r){var n=e[i][1][r];return o(n||r)},p,p.exports,r,e,n,t)}return n[i].exports}for(var u="function"==typeof require&&require,i=0;i<t.length;i++)o(t[i]);return o}return r})()({1:[function(require,module,exports){
+const champion = require('./champion.js')
+
 const insertButtons = (btN) => `<div class='storyDiv'>${btN}</div>`
 
 // const storyButtonInputs = [
@@ -43,8 +45,12 @@ const storyButtonInputs = [
     '', //11
     '' //12
 ]
-module.exports = {storyButtonInputs, insertButtons};
-},{}],2:[function(require,module,exports){
+
+const initSSFButton = () => {
+    return `<button type='button' id='${champion.championValues.storyPoint}' class='contButton'>Back to Story</button>`
+}
+module.exports = {storyButtonInputs, insertButtons, initSSFButton};
+},{"./champion.js":2}],2:[function(require,module,exports){
 const rollDice = require('./rollDice.js')
 const weapons = require('./weapons.js')
 
@@ -76,32 +82,44 @@ const updateButtons = require('./updateButton.js')
 
 let storySoFar = ""
 
-let form = document.querySelector('#userInput')
-const submitForm = () => {
-    form.addEventListener('submit', (e) => {
-        e.preventDefault()
+const initStory = (e) => {
+    e.preventDefault()
 
-        localStorage.name = document.querySelector('#championName').value
-        localStorage.title = document.querySelector('#championTitle').value
-        localStorage.heritage = document.querySelector('#championHeritage').value
-        if(document.querySelector('#godMode').value === 'What do you mean? An African or European swallow?') {
-            localStorage.mode = true;
-        }
-        champion.championSet()
-        story.buildScript(champion.championValues, treasure.swords, treasure.shields)
-        champion.championValues.storyPoint = 1;
-        document.querySelector('#adventureTitle').textContent = `Welcome to ${champion.championValues.name}'s Adventure!`
-        storySoFar += story.script[champion.championValues.storyPoint]
-        localStorage.story = storySoFar
-        form.remove();
-        document.querySelector('.mainContainer').innerHTML = (
-            `${story.insertStory(story.script[champion.championValues.storyPoint])} 
-            ${storyButtons.insertButtons(storyButtons.storyButtonInputs[champion.championValues.storyPoint])}`)
-        updateButtons()
-    })
+    localStorage.name = document.querySelector('#championName').value
+    localStorage.title = document.querySelector('#championTitle').value
+    localStorage.heritage = document.querySelector('#championHeritage').value
+    if(document.querySelector('#godMode').value === 'What do you mean? An African or European swallow?') {
+        localStorage.mode = true;
+    }
+    champion.championSet()
+    story.buildScript(champion.championValues, treasure.swords, treasure.shields)
+    champion.championValues.storyPoint = 1;
+    document.querySelector('#adventureTitle').textContent = `Welcome to ${champion.championValues.name}'s Adventure!`
+    storySoFar += story.script[champion.championValues.storyPoint]
+    localStorage.story = storySoFar
+    form.remove();
+    document.querySelector('.mainContainer').innerHTML = (
+        `${story.insertStory(story.script[champion.championValues.storyPoint])} 
+        ${storyButtons.insertButtons(storyButtons.storyButtonInputs[champion.championValues.storyPoint])}`)
+    updateButtons(storySoFar)
 }
 
+let form = document.querySelector('#userInput')
+const submitForm = () => {
+    form.addEventListener('submit', initStory)
+}
 submitForm()
+// document.addEventListener('DOMContentLoaded', (e) => {
+//     if(champion.championValues.storyPoint === 0 || champion.championValues === undefined) {
+//         submitForm()
+//     } else {
+//         document.querySelector('.mainContainer').innerHTML = (
+//             `${story.insertStory(story.script[champion.championValues.storyPoint])} 
+//             ${storyButtons.insertButtons(storyButtons.storyButtonInputs[champion.championValues.storyPoint])}`)
+//         updateButtons(storySoFar)
+//     }
+// })
+
 
 let reset = document.querySelector('#restart')
 reset.addEventListener('click', (e) => {
@@ -113,6 +131,7 @@ reset.addEventListener('click', (e) => {
         `${story.insertStory(story.script[champion.championValues.storyPoint])} 
         ${storyButtons.insertButtons(storyButtons.storyButtonInputs[champion.championValues.storyPoint])}`)
     localStorage.clear()
+    form.removeEventListener('click', initStory)
     submitForm()
 })
 
@@ -120,8 +139,12 @@ let storyDisplay = document.querySelector('#chronoLog')
 storyDisplay.addEventListener('click', (e) => {
     e.preventDefault()
 
-    document.querySelector('.mainContainer').innerHTML = localStorage.story
+    document.querySelector('.mainContainer').innerHTML = (
+        `${story.insertStory(localStorage.story)}${storyButtons.insertButtons(storyButtons.initSSFButton())}`)
+    updateButtons(storySoFar)
 })
+
+module.exports = storySoFar;
 },{"./buttons.js":1,"./champion.js":2,"./story.js":6,"./updateButton.js":7,"./weapons.js":8}],4:[function(require,module,exports){
 const rollDice = require('./rollDice.js')
 
@@ -242,7 +265,7 @@ const storyButtons = require('./buttons.js')
 const champion = require('./champion.js')
 
 
-const updateButtons = () => {
+const updateButtons = (storySoFar) => {
     let buttonOne = document.querySelector('.storyButton1') || ''
     let buttonTwo = document.querySelector('.storyButton2') || ''
     let contButton = document.querySelector('.contButton') || ''
@@ -252,10 +275,12 @@ const updateButtons = () => {
         e.preventDefault()
 
         champion.championValues.storyPoint = Number.parseInt(buttonOne.id)
+        storySoFar += story.script[champion.championValues.storyPoint]
+        localStorage.story = storySoFar
         document.querySelector('.mainContainer').innerHTML = (
             `${story.insertStory(story.script[champion.championValues.storyPoint])} 
             ${storyButtons.insertButtons(storyButtons.storyButtonInputs[champion.championValues.storyPoint])}`)
-        updateButtons()
+        updateButtons(storySoFar)
         })
     }
 
@@ -264,10 +289,12 @@ const updateButtons = () => {
         e.preventDefault()
 
         champion.championValues.storyPoint = Number.parseInt(buttonTwo.id)
+        storySoFar += story.script[champion.championValues.storyPoint]
+        localStorage.story = storySoFar
         document.querySelector('.mainContainer').innerHTML = (
             `${story.insertStory(story.script[champion.championValues.storyPoint])} 
             ${storyButtons.insertButtons(storyButtons.storyButtonInputs[champion.championValues.storyPoint])}`)
-        updateButtons()
+        updateButtons(storySoFar)
         })
     }
 
@@ -276,10 +303,14 @@ const updateButtons = () => {
         e.preventDefault()
         
         champion.championValues.storyPoint = Number.parseInt(contButton.id)
+        if(contButton.textContent !== 'Back to Story') {
+            storySoFar += story.script[champion.championValues.storyPoint]
+            localStorage.story = storySoFar
+        }
         document.querySelector('.mainContainer').innerHTML = (
             `${story.insertStory(story.script[champion.championValues.storyPoint])} 
             ${storyButtons.insertButtons(storyButtons.storyButtonInputs[champion.championValues.storyPoint])}`)
-        updateButtons()
+        updateButtons(storySoFar)
         })
     }
 }

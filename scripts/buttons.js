@@ -1,3 +1,5 @@
+const champion = require('./champion.js')
+
 const insertButtons = (btN) => `<div class='storyDiv'>${btN}</div>`
 
 // const storyButtonInputs = [
@@ -42,4 +44,8 @@ const storyButtonInputs = [
     '', //11
     '' //12
 ]
-module.exports = {storyButtonInputs, insertButtons};
+
+const initSSFButton = () => {
+    return `<button type='button' id='${champion.championValues.storyPoint}' class='contButton'>Back to Story</button>`
+}
+module.exports = {storyButtonInputs, insertButtons, initSSFButton};
