@@ -1,6 +1,8 @@
 const monsters = require('./monster.js')
+const fight = require('./fight.js')
+
 const script = []
-const trapDamage = monsters[0].strength;
+const trapDamage = monsters.monsters[1].breath;
 
 const insertStory = (text) => `<div class='storyText'>${text}</div>`
 
@@ -27,7 +29,6 @@ const insertStory = (text) => `<div class='storyText'>${text}</div>`
 //     }
 // }
 
-const fight = {0: 0, 1: 0}
 
 const buildScript = (champObj) => {
     const preFabScriptArr = [
@@ -38,8 +39,6 @@ const buildScript = (champObj) => {
             <input type="text" id='championTitle' pattern='[a-zA-Z0-9]+' required><br>
             <label for='ChampionHeritage'>Where are you from?</label>
             <input type='text' id='championHeritage' pattern="[a-zA-Z]+" required><br>
-            <label for='godMode'>What... is the air-speed velocity of an unladen swallow?</label>
-            <input type="text" id='godMode'><br><br>
             <input type="submit" class='button'>
         </form>`, //0
         `<p>Gather and behold! The story of ${champObj.name}, the ${champObj.title} of ${champObj.heritage}!<br>
@@ -77,7 +76,8 @@ const buildScript = (champObj) => {
             </p>`, //10
         `<p>Glory be to ${champObj.name} and your lineage! Proximo has been defeated, and ${champObj.heritage} is saved!<br>
             Now you just need to find out what to do with all of that treasure!</p>`, //11
-        `<p>Proximo stands triumphantly over you with mouth agape. You prepare for the blow and are met with nothing but darkness.</p>`//12
+        `<p>Proximo stands triumphantly over you with mouth agape. You prepare for final the blow and are met with nothing but darkness.</p>`, //12
+        `${fight.fightText()}` //13
     ]
 
     for(let i = 0; i < preFabScriptArr.length; i++){
@@ -85,4 +85,4 @@ const buildScript = (champObj) => {
     }
 }
 
-module.exports = {buildScript, script, insertStory};
+module.exports = {buildScript, script, insertStory, trapDamage};

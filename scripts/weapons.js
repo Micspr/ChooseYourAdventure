@@ -7,10 +7,10 @@ const swords = [
     {name: `the Enchanted Sword of Monster Slaying +2`, strength: (rollDice(4)+1)*2+2, string: 'The mild Monster Slaying Enchantment provides a mild bonus over your previous weapon'},
     {name: `the Enchanted Sword of Monster Slaying +3`, strength: (rollDice(4)+1)*2+3, string: 'The Monster Slaying Enchantment provides a distinct bonus over your previous weapon.'},
     {name: `the Enchanted Sword of Monster Slaying +4`, strength: (rollDice(4)+1)*2+4, string: 'The impressive Monster Slaying Enchantment is a night and day increase over your old hatchet.'},
-    {name: `Goldrin's Claymore`, strength: (rollDice(8)+1)*2+5, string: `The Goldrin's Claymore! Where the kobold managed to find it is a mystery, but clearly your quest is fated for glory.`},
-    {name: `Goldrin's Claymore`, strength: (rollDice(8)+1)*2+6, string: `The Goldrin's Claymore! Where the kobold managed to find it is a mystery, but clearly your quest is fated for glory.`},
-    {name: `Goldrin's Claymore`, strength: (rollDice(8)+1)*2+7, string: `The Goldrin's Claymore! Where the kobold managed to find it is a mystery, but clearly your quest is fated for glory.`},
-    {name: `Goldrin's Claymore`, strength: (rollDice(8)+1)*2+8, string: `The Goldrin's Claymore! Where the kobold managed to find it is a mystery, but clearly your quest is fated for glory.<br>
+    {name: `Goldrin's Claymore`, strength: (rollDice(8)+1)*2+5, string: `Goldrin's Claymore! Where the kobold managed to find it is a mystery, but clearly your quest is fated for glory.`},
+    {name: `Goldrin's Claymore`, strength: (rollDice(8)+1)*2+6, string: `Goldrin's Claymore! Where the kobold managed to find it is a mystery, but clearly your quest is fated for glory.`},
+    {name: `Goldrin's Claymore`, strength: (rollDice(8)+1)*2+7, string: `Goldrin's Claymore! Where the kobold managed to find it is a mystery, but clearly your quest is fated for glory.`},
+    {name: `Goldrin's Claymore`, strength: (rollDice(8)+1)*2+8, string: `Goldrin's Claymore! Where the kobold managed to find it is a mystery, but clearly your quest is fated for glory.<br>
             There's an engraving on the pommel showing a beheaded dragon.`}
 ]
 

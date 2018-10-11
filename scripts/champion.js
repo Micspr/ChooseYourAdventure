@@ -16,6 +16,9 @@ const championSet = () => {
     championValues.swordChosen = sword
     championValues.shieldChosen = shield
     championValues.hp = 30
+    championValues.strength = rollDice(4)+1
+    championValues.damageReduction = 0
 }
+
 
 module.exports = {championValues, championSet}

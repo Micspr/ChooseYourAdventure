@@ -1,6 +1,7 @@
 const story = require('./story.js')
 const storyButtons = require('./buttons.js')
 const champion = require('./champion.js')
+const fight = require('./fight.js')
 
 
 const updateButtons = (storySoFar) => {
@@ -13,7 +14,13 @@ const updateButtons = (storySoFar) => {
         e.preventDefault()
 
         champion.championValues.storyPoint = Number.parseInt(buttonOne.id)
-        storySoFar += story.script[champion.championValues.storyPoint]
+        if(Number.parseInt(buttonOne.id) === 5) {
+            champion.championValues.strength = champion.championValues.swordChosen.strength
+        }
+        if(Number.parseInt(contButton) === 9) {
+            champion.championValues.hp = champion.championValues.hp - story.trapDamage
+        }
+        storySoFar += story.insertStory(story.script[champion.championValues.storyPoint])
         localStorage.story = storySoFar
         document.querySelector('.mainContainer').innerHTML = (
             `${story.insertStory(story.script[champion.championValues.storyPoint])} 
@@ -27,7 +34,13 @@ const updateButtons = (storySoFar) => {
         e.preventDefault()
 
         champion.championValues.storyPoint = Number.parseInt(buttonTwo.id)
-        storySoFar += story.script[champion.championValues.storyPoint]
+        if(Number.parseInt(buttonOne.id) === 6) {
+            champion.championValues.damageReduction = champion.championValues.shieldChosen.damageReduction
+        }
+        if(Number.parseInt(buttonTwo.id) === 10) {
+            story.script.push(`${fight.fightTwoText()}`)
+        }
+        storySoFar += story.insertStory(story.script[champion.championValues.storyPoint])
         localStorage.story = storySoFar
         document.querySelector('.mainContainer').innerHTML = (
             `${story.insertStory(story.script[champion.championValues.storyPoint])} 
@@ -42,7 +55,7 @@ const updateButtons = (storySoFar) => {
         
         champion.championValues.storyPoint = Number.parseInt(contButton.id)
         if(contButton.textContent !== 'Back to Story') {
-            storySoFar += story.script[champion.championValues.storyPoint]
+            storySoFar += story.insertStory(story.script[champion.championValues.storyPoint])
             localStorage.story = storySoFar
         }
         document.querySelector('.mainContainer').innerHTML = (
