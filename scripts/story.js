@@ -51,7 +51,7 @@ const buildScript = (champObj) => {
         `<p>You begin your journey on a long winding path on the edge of the great ${champObj.heritage} Valley.<br>
             While following the path along a set of cliffs, you encounter a hideous Kobold bearing the three-clawed mark of Proximo dragging a sack across the path.<br>
             "Clearly to complete this quest, I must be able to slaughter one of Proximo's weakest of minions!",<br>
-            ${champObj.name} thought as they dove into the poor creature.</p>`, //3
+            you think as they dove into the poor creature.</p>`, //3
         `<p>With the kobold now defeated, you notice a gleam of treasure skittering towards a nearby cliff.<br>
             The items must have come from the sack the kobold was carrying and appear to be a sword and a shield.<br>
             With how close the items are to the edge, you can only retrieve one before they teeter into the brink.<br>
