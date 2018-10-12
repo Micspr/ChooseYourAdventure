@@ -7,6 +7,9 @@ const updateButtons = require('./updateButton.js')
 
 let storySoFar = ""
 
+const patternOne = /^[a-zA-Z\s]+$/
+const patternTwo = /^[a-zA-Z0-9\s]+$/
+
 // document.addEventListener('DOMContentLoaded', function(event) {
 //     if(localStorage.getItem('story') !== undefined) {
 //         updateButtons(localStorage.story)
@@ -16,6 +19,9 @@ let storySoFar = ""
 const initStory = (e) => {
     e.preventDefault()
 
+    if(!patternOne.test(document.querySelector('#championName').value)) {alert('Your name must be letters and spaces only.')}
+    if(!patternTwo.test(document.querySelector('#championTitle').value)) {alert('Your title must be letters, numbers, and spaces only.')}
+    if(!patternOne.test(document.querySelector('#championHeritage').value)) {alert('Your heritage must be letters and spaces only.')}
     localStorage.name = document.querySelector('#championName').value
     localStorage.title = document.querySelector('#championTitle').value
     localStorage.heritage = document.querySelector('#championHeritage').value

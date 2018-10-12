@@ -34,11 +34,11 @@ const buildScript = (champObj) => {
     const preFabScriptArr = [
         `<form id='userInput'>
             <label for='championName'>Enter your name, Champion:</label>
-            <input type="text" id="championName" pattern="[a-zA-Z]+" required><br>
+            <input type="text" id="championName" pattern="[a-zA-Z\s]+" required><br>
             <label for='championTitle'>What is your title?</label>
-            <input type="text" id='championTitle' pattern='[a-zA-Z0-9]+' required><br>
+            <input type="text" id='championTitle' pattern='[a-zA-Z0-9\s]+' required><br>
             <label for='ChampionHeritage'>Where are you from?</label>
-            <input type='text' id='championHeritage' pattern="[a-zA-Z]+" required><br>
+            <input type='text' id='championHeritage' pattern="[a-zA-Z\s]+" required><br>
             <input type="submit" class='button'>
         </form>`, //0
         `<p>Gather and behold! The story of ${champObj.name}, the ${champObj.title} of ${champObj.heritage}!<br>
