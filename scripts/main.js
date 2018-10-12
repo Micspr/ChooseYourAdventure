@@ -7,8 +7,8 @@ const updateButtons = require('./updateButton.js')
 
 let storySoFar = ""
 
-const patternOne = /^[a-zA-Z\s]+$/
-const patternTwo = /^[a-zA-Z0-9\s]+$/
+// const patternOne = /^[a-zA-Z\s]+$/
+// const patternTwo = /^[a-zA-Z0-9\s]+$/
 
 // document.addEventListener('DOMContentLoaded', function(event) {
 //     if(localStorage.getItem('story') !== undefined) {
@@ -16,12 +16,15 @@ const patternTwo = /^[a-zA-Z0-9\s]+$/
 //     }
 // })
 
-const initStory = (e) => {
-    e.preventDefault()
+// const initStory = (e) => {
+//     // e.preventDefault()
 
-    if(!patternOne.test(document.querySelector('#championName').value)) {alert('Your name must be letters and spaces only.')}
-    if(!patternTwo.test(document.querySelector('#championTitle').value)) {alert('Your title must be letters, numbers, and spaces only.')}
-    if(!patternOne.test(document.querySelector('#championHeritage').value)) {alert('Your heritage must be letters and spaces only.')}
+let form = document.querySelector('#userInput')
+form.addEventListener('submit', (e) => {
+    e.preventDefault()
+    //document.querySelector('#championName').setCustomValidity('Your name must be letters and spaces only.')
+
+
     localStorage.name = document.querySelector('#championName').value
     localStorage.title = document.querySelector('#championTitle').value
     localStorage.heritage = document.querySelector('#championHeritage').value
@@ -39,14 +42,7 @@ const initStory = (e) => {
         `${story.insertStory(story.script[champion.championValues.storyPoint])} 
         ${storyButtons.insertButtons(storyButtons.storyButtonInputs[champion.championValues.storyPoint])}`)
     updateButtons(storySoFar)
-}
-
-let form = document.querySelector('#userInput')
-const submitForm = () => {
-    form.addEventListener('submit', initStory)
-}
-
-submitForm()
+})
 
 let reset = document.querySelector('#restart')
 reset.addEventListener('click', (e) => {

@@ -151,14 +151,23 @@ const updateButtons = require('./updateButton.js')
 
 let storySoFar = ""
 
+// const patternOne = /^[a-zA-Z\s]+$/
+// const patternTwo = /^[a-zA-Z0-9\s]+$/
+
 // document.addEventListener('DOMContentLoaded', function(event) {
 //     if(localStorage.getItem('story') !== undefined) {
 //         updateButtons(localStorage.story)
 //     }
 // })
 
-const initStory = (e) => {
+// const initStory = (e) => {
+//     // e.preventDefault()
+
+let form = document.querySelector('#userInput')
+form.addEventListener('submit', (e) => {
     e.preventDefault()
+    //document.querySelector('#championName').setCustomValidity('Your name must be letters and spaces only.')
+
 
     localStorage.name = document.querySelector('#championName').value
     localStorage.title = document.querySelector('#championTitle').value
@@ -177,14 +186,7 @@ const initStory = (e) => {
         `${story.insertStory(story.script[champion.championValues.storyPoint])} 
         ${storyButtons.insertButtons(storyButtons.storyButtonInputs[champion.championValues.storyPoint])}`)
     updateButtons(storySoFar)
-}
-
-let form = document.querySelector('#userInput')
-const submitForm = () => {
-    form.addEventListener('submit', initStory)
-}
-
-submitForm()
+})
 
 let reset = document.querySelector('#restart')
 reset.addEventListener('click', (e) => {
@@ -281,11 +283,11 @@ const buildScript = (champObj) => {
     const preFabScriptArr = [
         `<form id='userInput'>
             <label for='championName'>Enter your name, Champion:</label>
-            <input type="text" id="championName" pattern="[a-zA-Z]+" required><br>
+            <input type="text" id="championName" pattern="[a-zA-Z\s]+" required><br>
             <label for='championTitle'>What is your title?</label>
-            <input type="text" id='championTitle' pattern='[a-zA-Z0-9]+' required><br>
+            <input type="text" id='championTitle' pattern='[a-zA-Z0-9\s]+' required><br>
             <label for='ChampionHeritage'>Where are you from?</label>
-            <input type='text' id='championHeritage' pattern="[a-zA-Z]+" required><br>
+            <input type='text' id='championHeritage' pattern="[a-zA-Z\s]+" required><br>
             <input type="submit" class='button'>
         </form>`, //0
         `<p>Gather and behold! The story of ${champObj.name}, the ${champObj.title} of ${champObj.heritage}!<br>
@@ -298,7 +300,7 @@ const buildScript = (champObj) => {
         `<p>You begin your journey on a long winding path on the edge of the great ${champObj.heritage} Valley.<br>
             While following the path along a set of cliffs, you encounter a hideous Kobold bearing the three-clawed mark of Proximo dragging a sack across the path.<br>
             "Clearly to complete this quest, I must be able to slaughter one of Proximo's weakest of minions!",<br>
-            ${champObj.name} thought as they dove into the poor creature.</p>`, //3
+            you think as they dove into the poor creature.</p>`, //3
         `<p>With the kobold now defeated, you notice a gleam of treasure skittering towards a nearby cliff.<br>
             The items must have come from the sack the kobold was carrying and appear to be a sword and a shield.<br>
             With how close the items are to the edge, you can only retrieve one before they teeter into the brink.<br>
