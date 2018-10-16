@@ -12,50 +12,26 @@ const setDidWin = (bool) => {
         didWin = 12
     }
 }
-
-// const storyButtonInputs = [
-//     '', //0
-
-//     `<button type='button' id='1' class='storyButton1'>Accept Quest</button>
-//     <button type='button' id='2' class='storyButton2'>Decline Quest</button>`, //1
-
-//     `<button type='button' id='3' class='button'>Continue</button>`, //2
-
-//     `<button type='button' id='4' class ='storyButton1'>Pick the Sword</button>
-//     <button type='button' id='5' class='storyButton2'>Pick the Shield</button>`, //3
-
-//     `<button type='button' id='6' class='button'>Continue</button>`, //4
-
-//     `<button type='button' id='7' class='storyButton1'>Follow the Tracks</button>
-//     <button type='button' id='10' class='storyButton2'>Through the Brush</button>`, //5
-
-//     `<button type='button' id='8' class='storyButton1'>Yes</button>
-//     <button type='button' id='9' class='storyButton2'>No</button>`, //6
-
-//     `<button type='button' id='11' class='storyButton1'>Yes</button>
-//     <button type='button' id='12' class='storyButton2'>No</button>` //7
-// ]
-
 const storyButtonInputs = [
-    '', //0
+    '', 
     `<button type='button' id='3' class='storyButton1'>Accept Quest</button>
-    <button type='button' id='2' class='storyButton2'>Decline Quest</button>`, //1
-    '', //2
-    `<button type='button' id='13' class='contButton'>Continue</button>`, //3
+    <button type='button' id='2' class='storyButton2'>Decline Quest</button>`, 
+    '', 
+    `<button type='button' id='13' class='contButton'>Continue</button>`,
     `<button type='button' id='5' class='storyButton1'>Choose the Sword</button>
-    <button type='button' id='6' class='storyButton2'>Choose the Shield</button>`, //4
-    `<button type='button' id='7' class='contButton'>Continue</button>`, //5
-    `<button type='button' id='7' class='contButton'>Continue</button>`, //6
+    <button type='button' id='6' class='storyButton2'>Choose the Shield</button>`,
+    `<button type='button' id='7' class='contButton'>Continue</button>`,
+    `<button type='button' id='7' class='contButton'>Continue</button>`,
     `<button type='button' id='8' class='storyButton1'>Follow the Path</button>
-    <button type='button' id='10' class='storyButton2'>Sneak in the Brush</button>`, //7
+    <button type='button' id='10' class='storyButton2'>Sneak in the Brush</button>`,
     `<button type='button' id='9' class='storyButton1'>Rest for the Night</button>
-    <button type='button' id='10' class='storyButton2'>Press On!</button>`, // 8
-    '', //9
-    `<button type='button' id='14' class='contButton'>Continue</button>`, //10
-    '', //11
-    '', //12
-    `<button type='button' id='4' class='contButton'>Continue</button>` //13
-    //14
+    <button type='button' id='10' class='storyButton2'>Press On!</button>`, 
+    '',
+    `<button type='button' id='14' class='contButton'>Continue</button>`,
+    '',
+    '',
+    `<button type='button' id='4' class='contButton'>Continue</button>`
+    
 ]
 
 const updateButton = () => storyButtonInputs[14].id = didWin
@@ -135,7 +111,6 @@ const fightTwoText = () => {
         }
     }
         dragonText += `<br>The battle is now over...</p>`
-        //buttons.updateButton()
         buttons.storyButtonInputs.push(`<button type='button' id='${won}' class='contButton'>Continue</button>`)
         return dragonText
 }
@@ -151,30 +126,12 @@ const updateButtons = require('./updateButton.js')
 
 let storySoFar = ""
 
-// const patternOne = /^[a-zA-Z\s]+$/
-// const patternTwo = /^[a-zA-Z0-9\s]+$/
-
-// document.addEventListener('DOMContentLoaded', function(event) {
-//     if(localStorage.getItem('story') !== undefined) {
-//         updateButtons(localStorage.story)
-//     }
-// })
-
-// const initStory = (e) => {
-//     // e.preventDefault()
-
 let form = document.querySelector('#userInput')
 form.addEventListener('submit', (e) => {
     e.preventDefault()
-    //document.querySelector('#championName').setCustomValidity('Your name must be letters and spaces only.')
-
-
     localStorage.name = document.querySelector('#championName').value
     localStorage.title = document.querySelector('#championTitle').value
     localStorage.heritage = document.querySelector('#championHeritage').value
-    // if(document.querySelector('#godMode').value === 'What do you mean? An African or European swallow?') {
-    //     localStorage.mode = true;
-    // }
     champion.championSet()
     story.buildScript(champion.championValues, treasure.swords, treasure.shields)
     champion.championValues.storyPoint = 1;
@@ -214,21 +171,6 @@ module.exports = storySoFar;
 },{"./buttons.js":1,"./champion.js":2,"./story.js":7,"./updateButton.js":8,"./weapons.js":9}],5:[function(require,module,exports){
 const rollDice = require('./rollDice.js')
 
-
-// const monsters = [
-//     {name: 'Brutalus', hp: 20, strength: rollDice(8), ability: 'devour' /*{devour: creatureInput.hp += 5}*/, storyPath: 0},
-//     //Schism Hydra
-//     {name: 'Proximo', hp: 35, strength: rollDice(8), ability: {Breath: rollDice(3)*5}, storyPath: 1},
-//     // Chromatic Dragon
-//     {name: 'Xyligtl', hp: 50, strength: rollDice(4), ability: {Consume:/*Select Loss Event*/'woops'}, storyPath: 2},
-//     //Chaos Spawn
-//     {name: 'White Raven', hp: Infinity, strength: rollDice(40)*20},
-//     {name: 'Slime', hp: 3, strength: rollDice(2)+1}, 
-//     {name: 'Kobold', hp: 3, strength: rollDice(3)+1}, 
-//     {name: 'Fleshling', hp: 3, strength: rollDice(2)+1}]
-
-// module.exports = monsters;
-
 const monsters = [
     {name: 'Kobold', hp: 3, strength: rollDice(3)+1},
     {name: 'Proximo', hp: 35, strength: rollDice(8)+1, breath: (rollDice((10)+1)*2)}
@@ -255,29 +197,6 @@ const trapDamage = monsters.monsters[1].breath;
 
 const insertStory = (text) => `<div class='storyText'>${text}</div>`
 
-// const buildScript = (champObj, monstArr, swordObj, shieldObj) => {
-//     const preFabScriptArr = [
-//         '',//0
-//         `<p>Gather and behold! The story of ${champObj.name}, the ${champObj.title} of ${champObj.heritage}!<br>
-//             Will they succeed upon their quest and conquer the mighty ${monstArr[champObj.monsterTrack].name}?<br>
-//             Will they fail and become another snack?<br>
-//             Let's decide...</p>`, //1
-//         { //Happily-ever-after Doom
-//         0:`<p>${champObj.name} went home. ${monstArr[champObj.monsterTrack].name} ate all the livestock and their village starved to death.<br> Oops.</p>`,
-//         1: `<p>${champObj.name} went home. ${monstArr[champObj.monsterTrack].name} devoured every creature in the valley and then razed it to ash.<br> Oops.</p>`,
-//         2: `<p>${champObj.name} went home. ${monstArr[champObj.monsterTrack].name} came later that night and assimilated his village.<br> 
-//             ${champObj.name} will now be able to eternally regret their choices as part of the hive beast as it slinks across the country and expands.</p>`
-//         }, //2
-//         { //Trek to monster
-//             0: `<p>${champObj.name} began their journey and encountered a minion of the heinous ${monstArr[champObj.monsterTrack].name}.
-//                 A ${monstArr[]} was</p>`
-//         }
-// ]
-//     for(let i = 0; i < preFabScriptArr.length; i++){
-//         script.push(preFabScriptArr[i])
-//     }
-// }
-
 
 const buildScript = (champObj) => {
     const preFabScriptArr = [
@@ -289,44 +208,44 @@ const buildScript = (champObj) => {
             <label for='ChampionHeritage'>Where are you from?</label>
             <input type='text' id='championHeritage' pattern="[a-zA-Z\s]+" required><br>
             <input type="submit" class='button'>
-        </form>`, //0
+        </form>`, 
         `<p>Gather and behold! The story of ${champObj.name}, the ${champObj.title} of ${champObj.heritage}!<br>
             Will you succeed upon your quest and conquer the mighty Proximo, the Fire Scourge and Devourer of Man?<br>
             Will you fail and become another snack, leaving ${champObj.heritage} to ruin?<br>
-            Let's decide...</p>`, //1
+            Let's decide...</p>`, 
         `<p>${champObj.name} went home rather than hunt Proximo.<br>
             Proximo took the opportunity to eat every living creature in ${champObj.heritage} and razed it to the ground.<br>
-            Lament your choices in the belly of the Devourer.</p>`, //2
+            Lament your choices in the belly of the Devourer.</p>`, 
         `<p>You begin your journey on a long winding path on the edge of the great ${champObj.heritage} Valley.<br>
             While following the path along a set of cliffs, you encounter a hideous Kobold bearing the three-clawed mark of Proximo dragging a sack across the path.<br>
             "Clearly to complete this quest, I must be able to slaughter one of Proximo's weakest of minions!",<br>
-            you think as they dove into the poor creature.</p>`, //3
+            you think as they dove into the poor creature.</p>`, 
         `<p>With the kobold now defeated, you notice a gleam of treasure skittering towards a nearby cliff.<br>
             The items must have come from the sack the kobold was carrying and appear to be a sword and a shield.<br>
             With how close the items are to the edge, you can only retrieve one before they teeter into the brink.<br>
-            Which will you choose?</p>`, //4
+            Which will you choose?</p>`, 
         `<p>With an ungraceful tumble you narrowly prevent ${champObj.swordChosen.name} from slipping into the void.<br>
-            ${champObj.swordChosen.string}</p>`, //5
+            ${champObj.swordChosen.string}</p>`, 
         `<p>The shield tumbles over the edge. Being as brave as you are, you tumble after it.<br> Thankfully, you land on a small outcropping with the shield in hand.<br>
-            ${champObj.shieldChosen.string}</p>`, //6
+            ${champObj.shieldChosen.string}</p>`, 
         `<p>Further down the path in a great chasm, you note some rather obvious tracks leading around a bend.<br>
-            Do you follow the path, or take a 'shortcut' through the brush?</p>`, //7
+            Do you follow the path, or take a 'shortcut' through the brush?</p>`, 
         `<p>The tracks were a trap!<br>The dragon swoops in and pours a great gout of flame over the path, dealing ${trapDamage} damage to you.<br>
-            Proximo knows you're hunting it! Cursing your luck, you decide whether you should rest in the chasm wall or chase the dragon into the now smoking brush.</p>`, //8
+            Proximo knows you're hunting it! Cursing your luck, you decide whether you should rest in the chasm wall or chase the dragon into the now smoking brush.</p>`, 
         `<p>You decide to make camp and rest for the night...<br>
             You awake to the smell of smoke. A great wildfire is consuming the forest before you!<br>
             As you snap back to your senses you hear screaming in the distance.<br>
             Without thinking, you rush to the source only to come face to face with Proximo's head and a man in a loincloth.<br>
             "KRILGOR THE STRONGEST! ALL HAIL KRILGOR THE DRAGON SLAYER!"<br>
-            The words echo through your mind, as you realize that your chance for glory has been lost. It's going to be a long trip home.</p>`, //9
+            The words echo through your mind, as you realize that your chance for glory has been lost. It's going to be a long trip home.</p>`, 
         `<p>You tip-toe into the brush, being careful to stay quiet. Something about the tracks just seems unnatural...<br>
             Several minutes later, you hear screaming in the distance. The wind begins to pulse in great gusts as it carries the pungent odor of charred flesh and burning wood.<br>
             You look up just in time to see some poor soul become Proximo's next meal. The chasm goes up in a great explosion of flame as Proximo's wing beats fuel the fire.<br>
-            </p>`, //10
+            </p>`, 
         `<p>Glory be to ${champObj.name} and your lineage! Proximo has been defeated, and ${champObj.heritage} is saved!<br>
-            Now you just need to find out what to do with all of that treasure!</p>`, //11
-        `<p>Proximo stands triumphantly over you with mouth agape. You prepare for final the blow and are met with nothing but darkness.</p>`, //12
-        `${fight.fightText()}` //13
+            Now you just need to find out what to do with all of that treasure!</p>`, 
+        `<p>Proximo stands triumphantly over you with mouth agape. You prepare for final the blow and are met with nothing but darkness.</p>`, 
+        `${fight.fightText()}` 
     ]
 
     for(let i = 0; i < preFabScriptArr.length; i++){

@@ -7,30 +7,12 @@ const updateButtons = require('./updateButton.js')
 
 let storySoFar = ""
 
-// const patternOne = /^[a-zA-Z\s]+$/
-// const patternTwo = /^[a-zA-Z0-9\s]+$/
-
-// document.addEventListener('DOMContentLoaded', function(event) {
-//     if(localStorage.getItem('story') !== undefined) {
-//         updateButtons(localStorage.story)
-//     }
-// })
-
-// const initStory = (e) => {
-//     // e.preventDefault()
-
 let form = document.querySelector('#userInput')
 form.addEventListener('submit', (e) => {
     e.preventDefault()
-    //document.querySelector('#championName').setCustomValidity('Your name must be letters and spaces only.')
-
-
     localStorage.name = document.querySelector('#championName').value
     localStorage.title = document.querySelector('#championTitle').value
     localStorage.heritage = document.querySelector('#championHeritage').value
-    // if(document.querySelector('#godMode').value === 'What do you mean? An African or European swallow?') {
-    //     localStorage.mode = true;
-    // }
     champion.championSet()
     story.buildScript(champion.championValues, treasure.swords, treasure.shields)
     champion.championValues.storyPoint = 1;

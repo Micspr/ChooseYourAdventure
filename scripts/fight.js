@@ -43,7 +43,6 @@ const fightTwoText = () => {
         }
     }
         dragonText += `<br>The battle is now over...</p>`
-        //buttons.updateButton()
         buttons.storyButtonInputs.push(`<button type='button' id='${won}' class='contButton'>Continue</button>`)
         return dragonText
 }
